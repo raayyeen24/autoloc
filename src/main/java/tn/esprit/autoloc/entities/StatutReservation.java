@@ -1,6 +1,6 @@
 package tn.esprit.autoloc.entities;
 
-public enum STATUTRESERVATION {
+public enum StatutReservation {
     EN_ATTENTE,
     CONFIRMEE,
     ANNULEE,

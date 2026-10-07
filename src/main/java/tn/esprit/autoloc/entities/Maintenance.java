@@ -16,16 +16,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CLIENT {
+public class Maintenance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idClient;
+    private Long idMaintenance;
 
-    private String nom;
-    private String prenom;
-    private String email;
-    private String telephone;
-    private String numPermis;
-    private LocalDate dateInscription;
+    private LocalDate dateDebut;
+    private LocalDate dateFin;
+    private String description;
 }

@@ -1,6 +1,6 @@
 package tn.esprit.autoloc.entities;
 
-public enum ROLEEMPLOYE {
+public enum RoleEmploye {
     AGENT,
     MANAGER
 }

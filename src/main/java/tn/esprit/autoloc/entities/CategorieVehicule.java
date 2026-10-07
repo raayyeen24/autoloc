@@ -1,6 +1,6 @@
 package tn.esprit.autoloc.entities;
 
-public enum CATEGORIEVEHICULE {
+public enum CategorieVehicule {
     CITADINE,
     BERLINE,
     SUV,

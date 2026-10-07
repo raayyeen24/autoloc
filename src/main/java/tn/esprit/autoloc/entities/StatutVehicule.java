@@ -1,6 +1,6 @@
 package tn.esprit.autoloc.entities;
 
-public enum STATUTVEHICULE {
+public enum StatutVehicule {
     DISPONIBLE,
     LOUE,
     MAINTENANCE

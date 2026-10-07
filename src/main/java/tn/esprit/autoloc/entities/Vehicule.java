@@ -1,7 +1,6 @@
 package tn.esprit.autoloc.entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,15 +18,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PAIEMENT {
+public class Vehicule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPaiement;
+    private Long idVehicule;
 
-    private BigDecimal montant;
-    private LocalDate datePaiement;
+    private String immatriculation;
+    private String marque;
+    private String modele;
 
     @Enumerated(EnumType.STRING)
-    private MODEPAIEMENT modePaiement;
+    private CategorieVehicule categorie;
+
+    private BigDecimal tarifJournalier;
+
+    @Enumerated(EnumType.STRING)
+    private StatutVehicule statut;
 }
+

@@ -1,8 +1,9 @@
 package tn.esprit.autoloc.entities;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,15 +17,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EMPLOYE {
+public class Contrat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEmploye;
+    private Long idContrat;
 
-    private String nom;
-    private String prenom;
-
-    @Enumerated(EnumType.STRING)
-    private ROLEEMPLOYE role;
+    private LocalDate dateSignature;
+    private BigDecimal montantTotal;
+    private boolean valide;
 }

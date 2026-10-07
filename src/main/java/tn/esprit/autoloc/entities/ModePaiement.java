@@ -1,6 +1,6 @@
 package tn.esprit.autoloc.entities;
 
-public enum MODEPAIEMENT {
+public enum ModePaiement {
     CARTE,
     ESPECES,
     VIREMENT

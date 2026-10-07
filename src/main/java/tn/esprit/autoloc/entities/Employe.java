@@ -1,7 +1,5 @@
 package tn.esprit.autoloc.entities;
 
-import java.math.BigDecimal;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -18,22 +16,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VEHICULE {
+public class Employe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idVehicule;
+    private Long idEmploye;
 
-    private String immatriculation;
-    private String marque;
-    private String modele;
-
-    @Enumerated(EnumType.STRING)
-    private CATEGORIEVEHICULE categorie;
-
-    private BigDecimal tarifJournalier;
+    private String nom;
+    private String prenom;
 
     @Enumerated(EnumType.STRING)
-    private STATUTVEHICULE statut;
+    private RoleEmploye role;
 }
-

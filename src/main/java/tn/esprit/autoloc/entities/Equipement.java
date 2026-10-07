@@ -1,10 +1,6 @@
 package tn.esprit.autoloc.entities;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,15 +14,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RESERVATION {
+public class Equipement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idReservation;
+    private Long idEquipement;
 
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
-
-    @Enumerated(EnumType.STRING)
-    private STATUTRESERVATION statut;
+    private String libelle;
 }
