@@ -9,6 +9,9 @@ public interface IAgenceService {
     public Agence ajouterAgence (Agence a) ;
     public Agence updateAgence (Agence a);
     public void deleteAgence (int id) ;
+
+    void deleteAgence(long id);
+
     public Agence getAgence (int id );
     public List <Agence> getAllAgences () ;
 

@@ -31,12 +31,17 @@ public class AgenceServiceImpl implements IAgenceService {
 
     @Override
     public void deleteAgence(int id) {
+
+    }
+
+    @Override
+    public void deleteAgence(long id) {
         agenceRepository.deleteById(id);
     }
 
     @Override
     public Agence getAgence(int id) {
-        return agenceRepository.findById(id).get();
+        return agenceRepository.findById((long) id).get();
     }
 
     @Override
