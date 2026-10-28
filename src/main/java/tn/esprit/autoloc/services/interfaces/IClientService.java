@@ -4,14 +4,9 @@ import tn.esprit.autoloc.entities.Client;
 import java.util.List;
 
 public interface IClientService {
-
-    public Client ajouterClient(Client c);
-
-    public Client updateClient(Client c);
-
-    public void deleteClient(Long id);
-
-    public Client getClient(Long id);
-
-    public List<Client> getAllClients();
+    Client ajouterClient(Client entity);
+    Client updateClient(Client entity);
+    void deleteClient(Long id);
+    Client getClient(Long id);
+    List<Client> getAllClients();
 }

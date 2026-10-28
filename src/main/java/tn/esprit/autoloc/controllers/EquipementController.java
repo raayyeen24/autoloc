@@ -1,37 +1,37 @@
-
 package tn.esprit.autoloc.controllers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.entities.Equipement;
 import tn.esprit.autoloc.services.interfaces.IEquipementService;
 
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/equipement")
 public class EquipementController {
 
-    IEquipementService equipementService;
+    private final IEquipementService equipementService;
 
     @PostMapping("/ajouter")
-    public Equipement ajouterEquipement(@RequestBody Equipement e) {
+    public Equipement ajouterEquipement(@Valid @RequestBody Equipement e) {
         return equipementService.ajouterEquipement(e);
     }
 
     @PutMapping("/modifier")
-    public Equipement updateEquipement(@RequestBody Equipement e) {
+    public Equipement updateEquipement(@Valid @RequestBody Equipement e) {
         return equipementService.updateEquipement(e);
     }
 
     @DeleteMapping("/supprimer/{id}")
-    public void deleteEquipement(@PathVariable Long id) {
+    public void deleteEquipement(@PathVariable("id") Long id) {
         equipementService.deleteEquipement(id);
     }
 
     @GetMapping("/get/{id}")
-    public Equipement getEquipement(@PathVariable Long id) {
+    public Equipement getEquipement(@PathVariable("id") Long id) {
         return equipementService.getEquipement(id);
     }
 

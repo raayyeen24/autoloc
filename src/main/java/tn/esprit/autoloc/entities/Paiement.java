@@ -25,6 +25,7 @@ public class Paiement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPaiement;
 
+    @jakarta.validation.constraints.PositiveOrZero
     private BigDecimal montant;
     private LocalDate datePaiement;
 

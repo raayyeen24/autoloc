@@ -1,37 +1,37 @@
-
 package tn.esprit.autoloc.controllers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.entities.Paiement;
 import tn.esprit.autoloc.services.interfaces.IPaiementService;
 
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/paiement")
 public class PaiementController {
 
-    IPaiementService paiementService;
+    private final IPaiementService paiementService;
 
     @PostMapping("/ajouter")
-    public Paiement ajouterPaiement(@RequestBody Paiement p) {
+    public Paiement ajouterPaiement(@Valid @RequestBody Paiement p) {
         return paiementService.ajouterPaiement(p);
     }
 
     @PutMapping("/modifier")
-    public Paiement updatePaiement(@RequestBody Paiement p) {
+    public Paiement updatePaiement(@Valid @RequestBody Paiement p) {
         return paiementService.updatePaiement(p);
     }
 
     @DeleteMapping("/supprimer/{id}")
-    public void deletePaiement(@PathVariable Long id) {
+    public void deletePaiement(@PathVariable("id") Long id) {
         paiementService.deletePaiement(id);
     }
 
     @GetMapping("/get/{id}")
-    public Paiement getPaiement(@PathVariable Long id) {
+    public Paiement getPaiement(@PathVariable("id") Long id) {
         return paiementService.getPaiement(id);
     }
 

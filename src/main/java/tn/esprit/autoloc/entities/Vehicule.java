@@ -31,6 +31,7 @@ public class Vehicule {
     @Enumerated(EnumType.STRING)
     private CategorieVehicule categorie;
 
+    @jakarta.validation.constraints.PositiveOrZero
     private BigDecimal tarifJournalier;
 
     @Enumerated(EnumType.STRING)

@@ -29,4 +29,9 @@ public class Reservation {
 
     @Enumerated(EnumType.STRING)
     private StatutReservation statut;
+    @jakarta.validation.constraints.AssertTrue(message = "dateFin must be on or after dateDebut")
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    public boolean isDateRangeValid() {
+        return dateDebut == null || dateFin == null || !dateFin.isBefore(dateDebut);
+    }
 }

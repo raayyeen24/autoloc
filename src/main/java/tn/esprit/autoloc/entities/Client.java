@@ -24,6 +24,7 @@ public class Client {
 
     private String nom;
     private String prenom;
+    @jakarta.validation.constraints.Email
     private String email;
     private String telephone;
     private String numPermis;

@@ -7,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +15,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Contrat {
 
     @Id
@@ -24,6 +22,7 @@ public class Contrat {
     private Long idContrat;
 
     private LocalDate dateSignature;
+    @jakarta.validation.constraints.PositiveOrZero
     private BigDecimal montantTotal;
     private boolean valide;
 }

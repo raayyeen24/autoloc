@@ -25,4 +25,9 @@ public class Maintenance {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private String description;
+    @jakarta.validation.constraints.AssertTrue(message = "dateFin must be on or after dateDebut")
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    public boolean isDateRangeValid() {
+        return dateDebut == null || dateFin == null || !dateFin.isBefore(dateDebut);
+    }
 }

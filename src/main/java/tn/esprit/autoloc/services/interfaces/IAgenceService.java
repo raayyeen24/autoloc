@@ -1,18 +1,12 @@
 package tn.esprit.autoloc.services.interfaces;
 
 import tn.esprit.autoloc.entities.Agence;
-
 import java.util.List;
 
 public interface IAgenceService {
-
-    public Agence ajouterAgence (Agence a) ;
-    public Agence updateAgence (Agence a);
-    public void deleteAgence (int id) ;
-
-    void deleteAgence(long id);
-
-    public Agence getAgence (int id );
-    public List <Agence> getAllAgences () ;
-
+    Agence ajouterAgence(Agence entity);
+    Agence updateAgence(Agence entity);
+    void deleteAgence(Long id);
+    Agence getAgence(Long id);
+    List<Agence> getAllAgences();
 }

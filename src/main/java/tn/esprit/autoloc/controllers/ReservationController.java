@@ -1,37 +1,37 @@
-
 package tn.esprit.autoloc.controllers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.entities.Reservation;
 import tn.esprit.autoloc.services.interfaces.IReservationService;
 
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {
 
-    IReservationService reservationService;
+    private final IReservationService reservationService;
 
     @PostMapping("/ajouter")
-    public Reservation ajouterReservation(@RequestBody Reservation r) {
+    public Reservation ajouterReservation(@Valid @RequestBody Reservation r) {
         return reservationService.ajouterReservation(r);
     }
 
     @PutMapping("/modifier")
-    public Reservation updateReservation(@RequestBody Reservation r) {
+    public Reservation updateReservation(@Valid @RequestBody Reservation r) {
         return reservationService.updateReservation(r);
     }
 
     @DeleteMapping("/supprimer/{id}")
-    public void deleteReservation(@PathVariable Long id) {
+    public void deleteReservation(@PathVariable("id") Long id) {
         reservationService.deleteReservation(id);
     }
 
     @GetMapping("/get/{id}")
-    public Reservation getReservation(@PathVariable Long id) {
+    public Reservation getReservation(@PathVariable("id") Long id) {
         return reservationService.getReservation(id);
     }
 

@@ -1,47 +1,52 @@
 package tn.esprit.autoloc.services.impls;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import tn.esprit.autoloc.repository.AgenceRepository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 import tn.esprit.autoloc.entities.Agence;
+import tn.esprit.autoloc.repository.AgenceRepository;
 import tn.esprit.autoloc.services.interfaces.IAgenceService;
-
 import java.util.List;
 
-
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
-
+@Transactional(readOnly = true)
 public class AgenceServiceImpl implements IAgenceService {
-
-    AgenceRepository agenceRepository ;
-
-
-
+    private final AgenceRepository agenceRepository;
 
     @Override
-    public Agence ajouterAgence(Agence a) {
-        return agenceRepository.save(a);
+    @Transactional
+    public Agence ajouterAgence(Agence entity) {
+        if (entity.getIdAgence() != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Do not supply idAgence when creating a agence");
+        }
+        return agenceRepository.save(entity);
     }
 
     @Override
-    public Agence updateAgence(Agence a) {
-        return agenceRepository.save(a);
+    @Transactional
+    public Agence updateAgence(Agence entity) {
+        getAgence(entity.getIdAgence());
+        return agenceRepository.save(entity);
     }
 
     @Override
-    public void deleteAgence(int id) {
-
+    @Transactional
+    public void deleteAgence(Long id) {
+        agenceRepository.delete(getAgence(id));
     }
 
     @Override
-    public void deleteAgence(long id) {
-        agenceRepository.deleteById(id);
-    }
-
-    @Override
-    public Agence getAgence(int id) {
-        return agenceRepository.findById((long) id).get();
+    public Agence getAgence(Long id) {
+        if (id == null || id <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A positive ID is required");
+        }
+        return agenceRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Agence not found with ID " + id));
     }
 
     @Override
