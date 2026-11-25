@@ -1,6 +1,7 @@
 package tn.esprit.autoloc.services.interfaces;
 
 import tn.esprit.autoloc.entities.Equipement;
+import tn.esprit.autoloc.entities.Vehicule;
 import java.util.List;
 
 public interface IEquipementService {
@@ -9,4 +10,6 @@ public interface IEquipementService {
     void deleteEquipement(Long id);
     Equipement getEquipement(Long id);
     List<Equipement> getAllEquipements();
+    Vehicule affecterEquipement(Long idVehicule, Long idEquipement);
+    Vehicule desaffecterEquipement(Long idVehicule, Long idEquipement);
 }

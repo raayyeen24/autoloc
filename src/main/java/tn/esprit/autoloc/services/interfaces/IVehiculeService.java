@@ -9,4 +9,5 @@ public interface IVehiculeService {
     void deleteVehicule(Long id);
     Vehicule getVehicule(Long id);
     List<Vehicule> getAllVehicules();
+    Vehicule affecterVehicule(Long idVehicule, Long idAgence);
 }

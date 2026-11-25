@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import tn.esprit.autoloc.entities.Vehicule;
+import tn.esprit.autoloc.entities.Agence;
 import tn.esprit.autoloc.repository.VehiculeRepository;
+import tn.esprit.autoloc.repository.AgenceRepository;
 import tn.esprit.autoloc.services.interfaces.IVehiculeService;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class VehiculeServiceImpl implements IVehiculeService {
     private final VehiculeRepository vehiculeRepository;
+    private final AgenceRepository agenceRepository;
 
     @Override
     @Transactional
@@ -52,5 +55,16 @@ public class VehiculeServiceImpl implements IVehiculeService {
     @Override
     public List<Vehicule> getAllVehicules() {
         return vehiculeRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public Vehicule affecterVehicule(Long idVehicule, Long idAgence) {
+        Vehicule veh = getVehicule(idVehicule);
+        Agence agence = agenceRepository.findById(idAgence)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Agence not found with ID " + idAgence));
+        veh.setAgence(agence);
+        return vehiculeRepository.save(veh);
     }
 }

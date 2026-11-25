@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.entities.Equipement;
+import tn.esprit.autoloc.entities.Vehicule;
 import tn.esprit.autoloc.services.interfaces.IEquipementService;
 
 import java.util.List;
@@ -38,5 +39,15 @@ public class EquipementController {
     @GetMapping("/getAll")
     public List<Equipement> getAllEquipements() {
         return equipementService.getAllEquipements();
+    }
+
+    @PutMapping("/affecter/{idVehicule}/{idEquipement}")
+    public Vehicule affecterEquipement(@PathVariable Long idVehicule, @PathVariable Long idEquipement) {
+        return equipementService.affecterEquipement(idVehicule, idEquipement);
+    }
+
+    @PutMapping("/desaffecter/{idVehicule}/{idEquipement}")
+    public Vehicule desaffecterEquipement(@PathVariable Long idVehicule, @PathVariable Long idEquipement) {
+        return equipementService.desaffecterEquipement(idVehicule, idEquipement);
     }
 }

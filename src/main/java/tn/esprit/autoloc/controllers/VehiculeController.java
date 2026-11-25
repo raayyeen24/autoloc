@@ -39,4 +39,9 @@ public class VehiculeController {
     public List<Vehicule> getAllVehicules() {
         return vehiculeService.getAllVehicules();
     }
+
+    @PutMapping("/affecter/{idVehicule}/{idAgence}")
+    public Vehicule affecterVehicule(@PathVariable Long idVehicule, @PathVariable Long idAgence) {
+        return vehiculeService.affecterVehicule(idVehicule, idAgence);
+    }
 }

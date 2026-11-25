@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import tn.esprit.autoloc.entities.Employe;
+import tn.esprit.autoloc.entities.Agence;
 import tn.esprit.autoloc.repository.EmployeRepository;
+import tn.esprit.autoloc.repository.AgenceRepository;
 import tn.esprit.autoloc.services.interfaces.IEmployeService;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class EmployeServiceImpl implements IEmployeService {
     private final EmployeRepository employeRepository;
+    private final AgenceRepository agenceRepository;
 
     @Override
     @Transactional
@@ -52,5 +55,24 @@ public class EmployeServiceImpl implements IEmployeService {
     @Override
     public List<Employe> getAllEmployes() {
         return employeRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public Employe desaffecterEmploye(Long idEmploye) {
+        Employe emp = getEmploye(idEmploye);
+        emp.setAgence(null);
+        return employeRepository.save(emp);
+    }
+
+    @Override
+    @Transactional
+    public Employe affecterEmploye(Long idEmploye, Long idAgence) {
+        Employe emp = getEmploye(idEmploye);
+        Agence agence = agenceRepository.findById(idAgence)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Agence not found with ID " + idAgence));
+        emp.setAgence(agence);
+        return employeRepository.save(emp);
     }
 }

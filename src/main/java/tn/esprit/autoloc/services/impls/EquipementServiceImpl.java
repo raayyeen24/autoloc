@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import tn.esprit.autoloc.entities.Equipement;
+import tn.esprit.autoloc.entities.Vehicule;
 import tn.esprit.autoloc.repository.EquipementRepository;
+import tn.esprit.autoloc.repository.VehiculeRepository;
 import tn.esprit.autoloc.services.interfaces.IEquipementService;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class EquipementServiceImpl implements IEquipementService {
     private final EquipementRepository equipementRepository;
+    private final VehiculeRepository vehiculeRepository;
 
     @Override
     @Transactional
@@ -52,5 +55,30 @@ public class EquipementServiceImpl implements IEquipementService {
     @Override
     public List<Equipement> getAllEquipements() {
         return equipementRepository.findAll();
+    }
+
+    // ----------- nouvelles méthodes business -----------
+    @Override
+    @Transactional
+    public Vehicule affecterEquipement(Long idVehicule, Long idEquipement) {
+        Vehicule veh = vehiculeRepository.findById(idVehicule)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Vehicule not found with ID " + idVehicule));
+        Equipement eq = getEquipement(idEquipement);
+        if (!veh.getEquipements().contains(eq)) {
+            veh.getEquipements().add(eq);
+        }
+        return vehiculeRepository.save(veh);
+    }
+
+    @Override
+    @Transactional
+    public Vehicule desaffecterEquipement(Long idVehicule, Long idEquipement) {
+        Vehicule veh = vehiculeRepository.findById(idVehicule)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Vehicule not found with ID " + idVehicule));
+        Equipement eq = getEquipement(idEquipement);
+        veh.getEquipements().remove(eq);
+        return vehiculeRepository.save(veh);
     }
 }
