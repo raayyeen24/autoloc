@@ -130,6 +130,33 @@ class AutolocApplicationTests {
         assertThat(request("GET", "/agence/get/2147483648", null).statusCode()).isEqualTo(404);
     }
 
+    @Test
+    void createVehiculeWithAgenceIdAndEmptyEquipements() throws Exception {
+        HttpResponse<String> createdAgence = request("POST", "/agence/ajouter",
+                "{\"nom\":\"Agence Sfax\",\"ville\":\"Sfax\",\"adresse\":\"Centre\"}");
+        assertThat(createdAgence.statusCode()).as(createdAgence.body()).isEqualTo(200);
+        long idAgence = json.readTree(createdAgence.body()).path("idAgence").asLong();
+
+        String vehiculeJson = """
+                {
+                  "immatriculation": "123 TUN 456",
+                  "marque": "Toyota",
+                  "modele": "Yaris",
+                  "categorie": "CITADINE",
+                  "tarifJournalier": 80,
+                  "statut": "DISPONIBLE",
+                  "agence": {
+                    "idAgence": %d
+                  },
+                  "equipements": []
+                }
+                """.formatted(idAgence);
+        HttpResponse<String> createdVehicule = request("POST", "/vehicule/ajouter", vehiculeJson);
+        assertThat(createdVehicule.statusCode()).as(createdVehicule.body()).isEqualTo(200);
+        assertThat(json.readTree(createdVehicule.body()).path("agence").path("idAgence").asLong())
+                .isEqualTo(idAgence);
+    }
+
     private HttpResponse<String> request(String method, String path, String body) throws Exception {
         HttpRequest.Builder builder = HttpRequest.newBuilder(URI.create("http://localhost:" + port + path))
                 .header("Content-Type", "application/json");
