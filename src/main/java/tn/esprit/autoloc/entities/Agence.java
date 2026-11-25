@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,14 +26,15 @@ public class Agence {
     private String nom;
     private String ville;
     private String adresse;
+    private String telephone;
 
     // Relation OneToMany vers Employe
     @OneToMany(mappedBy = "agence")
-    @JsonIgnoreProperties("agence")
+    @JsonIgnore
     private List<Employe> employes;
 
     // Relation OneToMany vers Vehicule
     @OneToMany(mappedBy = "agence")
-    @JsonIgnoreProperties("agence")
+    @JsonIgnore
     private List<Vehicule> vehicules;
 }

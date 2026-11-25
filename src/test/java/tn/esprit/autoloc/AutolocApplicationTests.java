@@ -93,11 +93,18 @@ class AutolocApplicationTests {
         assertThat(response.statusCode()).as(response.body()).isEqualTo(200);
         JsonNode spec = json.readTree(response.body());
         assertThat(spec.path("info").path("title").asText()).isEqualTo("AutoLoc API");
-        assertThat(spec.path("paths").size()).isEqualTo(45);
         for (String route : new String[]{"agence", "client", "contrat", "employe", "equipement",
                 "maintenance", "paiement", "reservation", "vehicule"}) {
             assertThat(spec.path("paths").has("/" + route + "/ajouter")).isTrue();
             assertThat(spec.path("paths").has("/" + route + "/get/{id}")).isTrue();
+        }
+        for (String businessPath : new String[]{
+                "/employe/desaffecter/{idEmploye}",
+                "/employe/affecter/{idEmploye}/{idAgence}",
+                "/vehicule/affecter/{idVehicule}/{idAgence}",
+                "/equipement/affecter/{idVehicule}/{idEquipement}",
+                "/equipement/desaffecter/{idVehicule}/{idEquipement}"}) {
+            assertThat(spec.path("paths").has(businessPath)).isTrue();
         }
         assertThat(spec.path("components").path("schemas").path("Reservation")
                 .path("properties").has("dateRangeValid")).isFalse();

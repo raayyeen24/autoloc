@@ -31,6 +31,6 @@ public class Employe {
     private RoleEmploye role;
 
     @ManyToOne
-    @JsonIgnoreProperties("employes")
+    @JsonIgnoreProperties({"employes", "vehicules"})
     private Agence agence;
 }
